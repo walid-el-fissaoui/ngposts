@@ -6,6 +6,8 @@
 </div>
 <hr>
 <p [ngStyle]="{color: rooms.availableRooms ? 'green' : 'red'}">{{rooms.availableRooms ?? "no rooms"}}</p>
+<!-- {{roomsList | json}} -->
+<!-- | slice : 1 -->
 <div *ngIf="rooms.availableRooms">
     <h3>List of rooms</h3>
     <table>
@@ -20,13 +22,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomsList; let e = even; let o = odd; let i = index">
+            <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomsList | slice : 1; let e = even; let o = odd; let i = index">
                 <td>{{i}}</td>
                 <td>{{e ? "Even" : "Odd"}}</td>
-                <td>{{room.roomType}}</td>
-                <td>{{room.price}}</td>
-                <td>{{room.checkInDate}}</td>
-                <td>{{room.checkOutDate}}</td>
+                <td>{{room.roomType | uppercase}}</td>
+                <td>{{room.price | currency : 'GBP'}}</td>
+                <td>{{room.checkInDate | date : 'shortDate'}}</td>
+                <td>{{room.checkOutDate | date}}</td>
             </tr>
         </tbody>
     </table>
