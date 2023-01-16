@@ -1,1 +1,9 @@
-<app-rooms></app-rooms>
+<div [ngSwitch]="role">
+    <div *ngSwitchCase="'User'">Welcome</div>
+    <div *ngSwitchCase="'Admin'">
+        <app-rooms></app-rooms>
+    </div>
+    <div *ngSwitchDefault>
+        You are not authorized to view this page
+    </div>
+</div>
