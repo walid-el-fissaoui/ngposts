@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Even/Odd</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Check in at</th>
+            <th>Check out at</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms | slice : 1; let e = even; let o = odd; let i = index">
+            <td>{{i}}</td>
+            <td>{{e ? "Even" : "Odd"}}</td>
+            <td>{{room.roomType | uppercase}}</td>
+            <td>{{room.price | currency : 'GBP'}}</td>
+            <td>{{room.checkInDate | date : 'shortDate'}}</td>
+            <td>{{room.checkOutDate | date}}</td>
+        </tr>
+    </tbody>
+</table>
