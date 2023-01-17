@@ -10,7 +10,7 @@
 <!-- | slice : 1 -->
 <div *ngIf="rooms.availableRooms">
     <h3>List of rooms</h3>
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>#</th>
@@ -34,4 +34,4 @@
     </table>
 
 </div>
-<button (click)="toggle()">toggle</button>
+<button class="btn btn-primary" (click)="toggle()">toggle</button>
