@@ -7,6 +7,7 @@
             <th>Price</th>
             <th>Check in at</th>
             <th>Check out at</th>
+            <th>select room</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,9 @@
             <td>{{room.price | currency : 'GBP'}}</td>
             <td>{{room.checkInDate | date : 'shortDate'}}</td>
             <td>{{room.checkOutDate | date}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="selectRoom(room)">select</button>
+            </td>
         </tr>
     </tbody>
 </table>
