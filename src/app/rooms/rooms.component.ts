@@ -16,6 +16,7 @@ export class RoomsComponent implements OnInit {
 
   roomsList: Array<RoomList> = [];
   selectedRoom! : RoomList;
+  title : String = "rooms list";
 
   rooms: Room = {
     availableRooms: 0
@@ -51,10 +52,22 @@ export class RoomsComponent implements OnInit {
 
   toggle() {
     this.hideRooms = !this.hideRooms;
+    this.title = "the list of rooms";
   }
 
   selectRoom(room : RoomList) {
     this.selectedRoom = room;
+  }
+  
+  addRoom() {
+    const room: RoomList = {
+      roomType: "added room",
+      price: 200,
+      checkInDate: new Date("11-Nov-2022"),
+      checkOutDate: new Date("13-Nov-2022")
+    }
+    // this.roomsList.push(room);
+    this.roomsList = [...this.roomsList,room];
   }
 
 }
