@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,  } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
 
 @Component({
@@ -22,6 +23,8 @@ export class RoomsComponent implements OnInit {
     availableRooms: 0
   }
 
+  // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   constructor() { }
 
   ngOnInit(): void {
@@ -48,6 +51,12 @@ export class RoomsComponent implements OnInit {
     this.rooms = {
       availableRooms: this.roomsList.length
     }  
+  }
+
+  ngAfterViewInit(): void {
+    // console.log("header");
+    // console.log(this.headerComponent);
+    this.headerComponent.title = "yes again";
   }
 
   toggle() {
