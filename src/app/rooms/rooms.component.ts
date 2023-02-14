@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,  } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
 
@@ -7,7 +7,7 @@ import { Room, RoomList } from "./rooms";
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
 
   hotelName = "walid hotel";
   numberOfRooms = 10;
@@ -25,6 +25,7 @@ export class RoomsComponent implements OnInit {
 
   // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
   constructor() { }
 
   ngOnInit(): void {
@@ -56,6 +57,12 @@ export class RoomsComponent implements OnInit {
   ngAfterViewInit(): void {
     // console.log("header");
     // console.log(this.headerComponent);
+    // this.headerComponent.title = "yes again";
+    console.log(this.headerChildrenComponent.last.title);
+    
+  }
+
+  ngAfterViewChecked() : void {
     this.headerComponent.title = "yes again";
   }
 
