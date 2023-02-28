@@ -58,7 +58,7 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     // console.log("header");
     // console.log(this.headerComponent);
     // this.headerComponent.title = "yes again";
-    console.log(this.headerChildrenComponent.last.title);
+    console.log(this.headerChildrenComponent.last.title); 
     
   }
 
