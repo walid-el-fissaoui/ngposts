@@ -1,11 +1,12 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.css']
+  styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
 
@@ -26,29 +27,11 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
-  constructor() { }
+
+  constructor(private roomsService: RoomsService) { }
 
   ngOnInit(): void {
-    this.roomsList = [
-      {
-        roomType: "deluxe room",
-        price: 100,
-        checkInDate: new Date("11-Nov-2022"),
-        checkOutDate: new Date("13-Nov-2022")
-      },
-      {
-        roomType: "deluxe room",
-        price: 200,
-        checkInDate: new Date("11-Nov-2022"),
-        checkOutDate: new Date("13-Nov-2022")
-      },
-      {
-        roomType: "deluxe room",
-        price: 500,
-        checkInDate: new Date("11-Nov-2022"),
-        checkOutDate: new Date("13-Nov-2022")
-      }
-    ];
+    this.roomsList = this.roomsService.getRooms();
     this.rooms = {
       availableRooms: this.roomsList.length
     }  
