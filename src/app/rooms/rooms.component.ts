@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
 import { RoomsService } from './services/rooms.service';
@@ -24,6 +25,14 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     availableRooms: 0
   }
 
+  stream = new Observable(observer => {
+    observer.next('user1');
+    observer.next('user2');
+    observer.next('user3');
+    observer.complete();
+    // observer.error('error');
+  })
+
   // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
@@ -31,7 +40,12 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   constructor(private roomsService: RoomsService) { }
 
   ngOnInit(): void {
-    this.roomsList = this.roomsService.getRooms();
+    this.stream.subscribe((data) => {
+      console.log(data);      
+    })
+    this.roomsService.getPosts().subscribe(
+      rooms => {this.roomsList = rooms}
+    );
     this.rooms = {
       availableRooms: this.roomsList.length
     }  
@@ -59,14 +73,28 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   }
   
   addRoom() {
-    const room: RoomList = {
-      roomType: "added room",
-      price: 200,
-      checkInDate: new Date("11-Nov-2022"),
-      checkOutDate: new Date("13-Nov-2022")
-    }
+    const post: RoomList = {
+      title: "added room",
+      description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus quis reiciendis debitis, rem dolor non. Repellendus quisquam fugiat quaerat ex, nisi labore modi minus eaque nihil sed deleniti, at dolorum a minima necessitatibus est non vitae.",
+      created_at: new Date("11-Nov-2022"),
+    } 
     // this.roomsList.push(room);
-    this.roomsList = [...this.roomsList,room];
+    this.roomsList = [...this.roomsList,post];
+    this.roomsService.addPost(post).subscribe((data) => {
+      this.roomsList = data;
+    })
+  }
+
+  editPost() {
+    const post: RoomList = {
+      id: 2,
+      title: "edited",
+      description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus quis reiciendis debitis, rem dolor non. Repellendus quisquam fugiat quaerat ex, nisi labore modi minus eaque nihil sed deleniti, at dolorum a minima necessitatibus est non vitae.",
+      created_at: new Date("11-Nov-2022"),
+    }
+    this.roomsService.editPost(post).subscribe((data) => {
+      this.roomsList = data;
+    })
   }
 
 }

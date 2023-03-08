@@ -3,8 +3,8 @@ export interface Room {
 }
 
 export interface RoomList {
-    roomType : string;
-    price : number;
-    checkInDate : Date;
-    checkOutDate : Date;
+    id?: number,
+    title : string;
+    description : string;
+    created_at : Date;
 }

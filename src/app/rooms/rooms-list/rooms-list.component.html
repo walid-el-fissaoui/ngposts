@@ -12,13 +12,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms | slice : 1; let e = even; let o = odd; let i = index">
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms | slice : 0; let e = even; let o = odd; let i = index">
             <td>{{i}}</td>
             <td>{{e ? "Even" : "Odd"}}</td>
-            <td>{{room.roomType | uppercase}}</td>
-            <td>{{room.price | currency : 'GBP'}}</td>
-            <td>{{room.checkInDate | date : 'shortDate'}}</td>
-            <td>{{room.checkOutDate | date}}</td>
+            <td>{{room.title | uppercase}}</td>
+            <td>{{room.description}}</td>
+            <td>{{room.created_at | date : 'shortDate'}}</td>
             <td>
                 <button class="btn btn-primary" (click)="selectRoom(room)">select</button>
             </td>
