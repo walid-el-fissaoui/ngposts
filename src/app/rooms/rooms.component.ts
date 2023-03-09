@@ -97,4 +97,10 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     })
   }
 
+  deletePost() {
+    this.roomsService.deletePost(2).subscribe((data) => {
+      this.roomsList = data;
+    })
+  }
+
 }

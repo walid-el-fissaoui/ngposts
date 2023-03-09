@@ -42,4 +42,8 @@ export class RoomsService {
     return this.http.put<RoomList[]>(`/api/v1/posts/${post.id}`,post);
   }
 
+  deletePost(id: number) {
+    return this.http.delete<RoomList[]>(`api/v1/posts/${id}`);
+  }
+
 }
