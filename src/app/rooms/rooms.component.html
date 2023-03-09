@@ -21,6 +21,7 @@
     <h3>List of rooms</h3>
     <app-rooms-list [rooms]="roomsList" (selectedRoom)="selectRoom($event)" [title]="title"></app-rooms-list>
 </div>
+{{ totalBytes }}
 <button class="btn btn-primary" (click)="toggle()">toggle</button>
 <button (click)="editPost()">Edit Post</button>
 <button (click)="deletePost()">Delete Post</button>

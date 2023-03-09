@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { RoomList } from '../rooms';
@@ -46,4 +46,14 @@ export class RoomsService {
     return this.http.delete<RoomList[]>(`api/v1/posts/${id}`);
   }
 
+  getPhotos() {
+    const request = new HttpRequest(
+      'GET',
+      `https://jsonplaceholder.typicode.com/photos`,
+      {
+        reportProgress: true
+      }
+    );
+    return this.http.request(request);
+  }
 }

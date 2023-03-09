@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
@@ -21,6 +22,8 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   selectedRoom! : RoomList;
   title : String = "rooms list";
 
+  totalBytes = 0;
+
   rooms: Room = {
     availableRooms: 0
   }
@@ -40,6 +43,22 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   constructor(private roomsService: RoomsService) { }
 
   ngOnInit(): void {
+    this.roomsService.getPhotos().subscribe((event) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log("request has been made");
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log("request success");
+          break;
+        case HttpEventType.DownloadProgress:
+          this.totalBytes += event.loaded;
+          break;
+        case HttpEventType.Response:
+          console.log(event.body);
+          break;
+      }
+    })
     this.stream.subscribe((data) => {
       console.log(data);      
     })
