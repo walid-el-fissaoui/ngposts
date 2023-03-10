@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, Subscription, of, Subject, map } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
 import { RoomsService } from './services/rooms.service';
@@ -16,7 +16,18 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   numberOfRooms = 10;
   hideRooms = false;
   subscription !: Subscription;
-  posts$ = this.roomsService.getPosts$;
+  error$ = new Subject<string>();
+  getErrors$ = this.error$.asObservable();
+  posts$ = this.roomsService.getPosts$.pipe(
+    catchError((err) => {
+      // console.log(err);
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
+  postsCount$ = this.roomsService.getPosts$.pipe(
+    map((posts) => posts.length)
+  );
 
   // rooms : Room = {};
 

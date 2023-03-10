@@ -8,6 +8,8 @@
     <p [innerText]="numberOfRooms"></p>
 </div>
 <hr>
+<!-- <h1 style="color: red;">{{getErrors$ | async}}</h1> -->
+<h1 style="color: red;">{{postsCount$ | async }}</h1>
 <p [ngStyle]="{color: rooms.availableRooms ? 'green' : 'red'}">{{rooms.availableRooms ?? "no rooms"}}</p>
 <div *ngIf="selectedRoom">
     {{selectedRoom | json}}
