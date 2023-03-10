@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren,  } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from "./rooms";
 import { RoomsService } from './services/rooms.service';
@@ -15,6 +15,8 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   hotelName = "walid hotel";
   numberOfRooms = 10;
   hideRooms = false;
+  subscription !: Subscription;
+  posts$ = this.roomsService.getPosts$;
 
   // rooms : Room = {};
 
@@ -62,9 +64,9 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     this.stream.subscribe((data) => {
       console.log(data);      
     })
-    this.roomsService.getPosts$.subscribe(
-      rooms => {this.roomsList = rooms}
-    );
+    // this.roomsService.getPosts$.subscribe(
+    //   rooms => {this.roomsList = rooms}
+    // );
     this.rooms = {
       availableRooms: this.roomsList.length
     }  
@@ -80,6 +82,12 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
 
   ngAfterViewChecked() : void {
     this.headerComponent.title = "yes again";
+  }
+
+  ngOnDestroy() {
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   toggle() {

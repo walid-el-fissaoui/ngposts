@@ -9,7 +9,7 @@ import {RoomList} from "../rooms";
 })
 export class RoomsListComponent implements OnInit, OnDestroy {
 
-  @Input() rooms : Array<RoomList> = [];
+  @Input() rooms : Array<RoomList> | null = [];
   @Input() title! : String;
   @Output() selectedRoom = new EventEmitter<RoomList>();
   constructor() { }

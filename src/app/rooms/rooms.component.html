@@ -19,7 +19,7 @@
 </div>
 <div *ngIf="hideRooms">
     <h3>List of rooms</h3>
-    <app-rooms-list [rooms]="roomsList" (selectedRoom)="selectRoom($event)" [title]="title"></app-rooms-list>
+    <app-rooms-list [rooms]="posts$ | async" (selectedRoom)="selectRoom($event)" [title]="title"></app-rooms-list>
 </div>
 {{ totalBytes }}
 <button class="btn btn-primary" (click)="toggle()">toggle</button>
