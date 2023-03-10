@@ -62,7 +62,7 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     this.stream.subscribe((data) => {
       console.log(data);      
     })
-    this.roomsService.getPosts().subscribe(
+    this.roomsService.getPosts$.subscribe(
       rooms => {this.roomsList = rooms}
     );
     this.rooms = {
