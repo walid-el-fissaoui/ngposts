@@ -19,6 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MatListModule } from '@angular/material/list';
     ContainerComponent,
     EmployeeComponent,
     AppNavComponent,
+    NotfoundComponent,
+    RoomBookingComponent,
   ],
   imports: [
     BrowserModule,
