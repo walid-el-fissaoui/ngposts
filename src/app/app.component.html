@@ -1,9 +1,9 @@
-<div [ngSwitch]="role">
+<!-- <div [ngSwitch]="role">
     <div *ngSwitchCase="'User'">Welcome</div>
     <div *ngSwitchCase="'Admin'">
         <app-container>
             <h1>Yes its me</h1>
-            <!-- <app-employee></app-employee> -->
+            <app-employee></app-employee>
             <app-rooms></app-rooms>
             <app-rooms></app-rooms>
         </app-container>
@@ -11,4 +11,7 @@
     <div *ngSwitchDefault>
         You are not authorized to view this page
     </div>
-</div>
+</div> -->
+<a [routerLink]="'rooms'">rooms</a>
+<a [routerLink]="'employee'">employee</a>
+<router-outlet></router-outlet>
